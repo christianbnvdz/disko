@@ -1,0 +1,20 @@
+name: Disko Program Testing
+
+on:
+  push:
+    branches:
+      - master
+
+defults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Disko Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setting up testing environment
+        uses: actions/checkout@v3
+      - name: Compiling and test
+        run: ./test/test.sh
