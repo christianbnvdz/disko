@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-defults:
+defaults:
   run:
     shell: bash
 
