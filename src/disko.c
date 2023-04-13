@@ -15,35 +15,38 @@
     along with disko.  If not, see <https://www.gnu.org/licenses/>. */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <getopt.h>
 #include "program_info.h"
 
 #define OPTSTRING "hv"
 
 int main(int argc, char* argv[]) {
+  // Make sure that something is supplied to the command
   if (argc == 1) {
     fprintf(stderr, "disko: nothing specified\nSee usage with 'disko -h' or man disko.\n");
 
     return 1;
   }
 
+  // Scan options, reporting will be handled by us, and perform an action based on argument
   opterr = 0;
   for (int opt; (opt = getopt(argc, argv, OPTSTRING)) != -1; ) {
     switch (opt) {
       case 'h':
         printf(get_help_string());
-        return 0;
+        return EXIT_SUCCESS;
       case 'v':
         printf(get_version_string());
-        return 0;
+        return EXIT_SUCCESS;
       case '?':
         fprintf(stderr, "disko: unrecognized option \"%c\"\n", optopt);
-        return 1;
+        return EXIT_FAILURE;
       default:
         fprintf(stderr, "\"%c\"\n", opt);
-        return 1;
+        return EXIT_FAILURE;
     }
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }

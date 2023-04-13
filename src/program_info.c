@@ -22,7 +22,7 @@ char* get_help_string(void) {
          "DRIVE refers to an entire, physical, bootable drive or a disk image.\n\n"
          "Recognized Options:\n"
          "  -h     Prints this help message\n"
-	       "  -v     Prints disko's version\n";
+         "  -v     Prints disko's version\n";
 }
 
 char* get_version_string(void) {
