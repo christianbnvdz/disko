@@ -20,7 +20,7 @@
 #include <stdint.h>
 #include "program_info.h"
 
-#define OPTSTRING "hv"
+#define OPTSTRING "ghv"
 
 // This is used to set a bit at the position where the character is in the alphabet
 // Ex: a -> ...0001 | d -> ...00001000
@@ -45,9 +45,8 @@ int main(int argc, char* argv[]) {
   for (int opt; (opt = getopt(argc, argv, OPTSTRING)) != -1; ) {
     switch (opt) {
       case 'h':
-        flagbits |= get_bit(opt);
-        break;
       case 'v':
+      case 'g':
         flagbits |= get_bit(opt);
         break;
       case '?':
@@ -75,6 +74,14 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "disko: you must specify exactly one disk or disk image.\n");
 
     return EXIT_FAILURE;
+  }
+
+  // If no options were specified, or if 'g' was specified, then print the gpt table
+  if (flagbits & get_bit('g') || flagbits == 0) {
+    printf("In G.\n");
+    
+    // If no options were specified then exit now
+    if (flagbits == 0) return EXIT_SUCCESS;
   }
 
   return EXIT_SUCCESS;
